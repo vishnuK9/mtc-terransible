@@ -50,7 +50,7 @@ resource "aws_default_route_table" "mtc_private_rt"  {
 }
 
 resource "aws_subnet" "mtc_public_subnet" {
-  count = 2
+  count = length(var.public_cidrs)
   vpc_id = aws_vpc.mtc_vpc.id
   cidr_block = var.public_cidrs[count.index]
   map_public_ip_on_launch = true
