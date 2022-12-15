@@ -16,6 +16,6 @@ resource "aws_internet_gateway" "mtc_igw" {
   vpc_id = aws_vpc.mtc_vpc.id
 
   tags = {
-    Name = "mtc_igw"
+    Name = "mtc_igw-${random_id.random.dec}"
   }
 }
