@@ -25,7 +25,7 @@ resource "aws_instance" "mtc_main" {
   key_name = aws_key_pair.mtc_ssh_key.id
   vpc_security_group_ids = [aws_security_group.mtc_sg.id]
   subnet_id = aws_subnet.mtc_public_subnet[count.index].id
-  #user_data = templatefile()
+  #user_data = templatefile() 
   root_block_device {
     volume_size = var.main_vol_size
   }
@@ -34,5 +34,12 @@ resource "aws_instance" "mtc_main" {
   }
   provisioner "local-exec" {
     command = "printf '\n${self.public_ip}' >> aws_hosts"
+  }
+} 
+
+resource "null_resource" "grafana_install" {
+  depends_on = [aws_instance.mtc_main]
+  provisioner "local-exec" {
+    command = "ansible-playbook -i aws_hosts --key-file /root/mtc-terransible/mtcterransible/mtc_ssh_key playbooks/grafana.yml"
   }
 }
