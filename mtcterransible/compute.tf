@@ -33,7 +33,7 @@ resource "aws_instance" "mtc_main" {
     "name" = "mtc_main-${random_id.mtc_node_id[count.index].dec}"
   }
   provisioner "local-exec" {
-    command = "printf '\n${self.public_ip}' >> aws_hosts"
+    command = "printf '\n${self.public_ip}' >> aws_hosts && aws ec2 wait instance-status-ok --instance-ids ${self.id} --region ap-south-1"
   }
 } 
 
