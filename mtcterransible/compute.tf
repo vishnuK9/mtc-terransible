@@ -22,7 +22,7 @@ resource "aws_instance" "mtc_main" {
   count = var.main_instance_count
   instance_type = var.main_instance_type
   ami = data.aws_ami.server_ami.id
-  # key_name = ""
+  key_name = aws_key_pair.mtc_ssh_key.id
   vpc_security_group_ids = [aws_security_group.mtc_sg.id]
   subnet_id = aws_subnet.mtc_public_subnet[count.index].id
   root_block_device {
