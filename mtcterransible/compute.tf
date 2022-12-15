@@ -32,4 +32,7 @@ resource "aws_instance" "mtc_main" {
   tags = {
     "name" = "mtc_main-${random_id.mtc_node_id[count.index].dec}"
   }
+  provisioner "local-exec" {
+    command = "printf '\n${self.public_ip}' >> aws_hosts"
+  }
 }
