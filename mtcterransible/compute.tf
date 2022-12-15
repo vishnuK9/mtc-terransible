@@ -25,6 +25,7 @@ resource "aws_instance" "mtc_main" {
   key_name = aws_key_pair.mtc_ssh_key.id
   vpc_security_group_ids = [aws_security_group.mtc_sg.id]
   subnet_id = aws_subnet.mtc_public_subnet[count.index].id
+  #user_data = templatefile()
   root_block_device {
     volume_size = var.main_vol_size
   }
