@@ -71,7 +71,7 @@ resource "aws_subnet" "mtc_private_subnet" {
   availability_zone = local.azs[count.index]
 
   tags = {
-    "name" = "mtc-private-${count.index+1}"
+    "name" = "mtc-private-${local.azs + count.index}"
   }
 }
 
