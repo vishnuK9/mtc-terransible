@@ -13,6 +13,11 @@ data "aws_ami" "server_ami" {
   }
 }
 
+resource "aws_key_pair" "mtc_ssh_key" {
+  key_name   = var.key_name
+  public_key = file(var.public_key_path)
+}
+
 resource "aws_instance" "mtc_main" {
   count = var.main_instance_count
   instance_type = var.main_instance_type
