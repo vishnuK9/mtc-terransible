@@ -90,6 +90,7 @@ spec:
   selector:
     matchLabels:
       app: webapp
+  replicas: 2
   template:
     metadata:
       labels:
