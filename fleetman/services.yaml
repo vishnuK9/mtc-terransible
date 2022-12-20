@@ -40,5 +40,4 @@ spec:
   ports:
   - port: 8080
     name: http
-    nodePort: 30020
-  type: LoadBalancer
+  type: ClusterIP
