@@ -4,7 +4,7 @@ metadata:
   name: queue
 spec:
   selector:
-    matchLables:
+    matchLabels:
       app: queue
   replicas: 1
   template:
