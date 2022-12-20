@@ -1,9 +1,7 @@
 apiVersion: v1
 kind: Service
-
 metadata:
   name: fleetman-queue
-
 spec:
   selector:
     app: queue
@@ -14,13 +12,12 @@ spec:
   - name: endpoint
     port: 61616
   type: LoadBalancer
+
 ---
 apiVersion: v1
 kind: Service
-
 metadata:
   name: fleetman-webapp
-
 spec:
   selector:
     app: webapp
@@ -29,6 +26,7 @@ spec:
     port: 80
     nodePort: 30080
   type: LoadBalancer
+  
 ---
 apiVersion: v1
 kind: Service
