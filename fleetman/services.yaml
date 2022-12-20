@@ -13,7 +13,7 @@ spec:
     nodePort: 30010
   - name: endpoint
     port: 61616
-  type: NodePort
+  type: LoadBalancer
 ---
 apiVersion: v1
 kind: Service
@@ -28,4 +28,4 @@ spec:
   - name: http
     port: 80
     nodePort: 30080
-  type: NodePort
+  type: LoadBalancer
