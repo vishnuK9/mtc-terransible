@@ -22,11 +22,11 @@ spec:
   selector:
     app: webapp
   ports:
-  - name: http
-    port: 80
+  - port: 80
+    name: http
     nodePort: 30080
   type: LoadBalancer
-  
+
 ---
 apiVersion: v1
 kind: Service
@@ -53,3 +53,4 @@ spec:
     name: http
     nodePort: 30020
   type: LoadBalancer
+
