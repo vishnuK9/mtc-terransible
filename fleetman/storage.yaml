@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: mylocalstorage
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 20Gi
@@ -20,7 +20,7 @@ spec:
   capacity:
     storage: 20Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   hostPath:
     path: "/mnt/some new/directory/structure/"
     type: DirectoryOrCreate
