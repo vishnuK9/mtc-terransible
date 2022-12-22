@@ -11,7 +11,7 @@ spec:
     nodePort: 30010
   - name: endpoint
     port: 61616
-  type: LoadBalancer
+  type: ClusterIP
 
 ---
 apiVersion: v1
@@ -52,5 +52,5 @@ spec:
   - port: 8080
     name: http
     nodePort: 30020
-  type: LoadBalancer
+  type: ClusterIP
 
