@@ -9,7 +9,7 @@ spec:
   - host: fleetman.com
     http:
       paths:
-        - path: /
+        - path: / 
           backend:
             service:
               name: fleetman-webapp
