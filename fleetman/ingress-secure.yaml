@@ -14,7 +14,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: "/queue"
         backend:
           service:
             name: fleetman-queue

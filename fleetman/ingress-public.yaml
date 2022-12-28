@@ -10,7 +10,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: "/webapp"
         backend:
           service:
             name: fleetman-webapp
