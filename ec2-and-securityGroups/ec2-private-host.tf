@@ -3,7 +3,7 @@ module "ec2_private" {
   version = "2.17.0"
 
   name = "${var.environment}-vm"
-  ami = "${data.aws_ami.amzlinux}"
+  ami = data.aws_ami.amzlinux.id
   instance_type = var.instance_type
   user_data = file("${path.module}/app1-install.sh")
   key_name = var.instance_keypair
