@@ -9,7 +9,10 @@ module "ec2_public" {
   subnet_id = data.terraform_remote_state.vpc.outputs.public_subnets[0]
   vpc_security_group_ids = [module.public_bastion_sg.this_security_group_id]
   tags = local.common_tags
+}
 
+resource "null_resource" "name" {
+  
   provisioner "local-exec" {
     command = "echo vpc created on `date` and vpc id : ${data.terraform_remote_state.vpc.outputs.vpc_id} >> creation-time-vpc-id.txt"
     working_dir = "local-exec-output-files/"
@@ -22,4 +25,4 @@ module "ec2_public" {
     when = destroy
     #on_failure = continue
   }    
-}
+} 
