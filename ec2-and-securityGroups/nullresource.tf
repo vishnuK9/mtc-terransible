@@ -2,7 +2,7 @@ resource "null_resource" "name" {
   depends_on = [module.ec2_public]
   connection {
     type = "ssh"
-    host = "${module.ec2_public.public_ip}"
+    host = "${module.ec2_public[*].public_ip}"
     user = "ec2-user"
     password = ""
     private_key = file("private-key/k8s.pem")
@@ -25,8 +25,8 @@ resource "null_resource" "name" {
   }
 
   provisioner "local-exec" {
+    when = destroy
     command = "echo destroy time prov `date` >> destroy-time-prov.txt "
     working_dir = "local-exec-output-files/"
-    when = destroy
   }
 }
