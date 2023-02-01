@@ -18,3 +18,11 @@ data "aws_ami" "amzlinux" {
     value = ["x86_64"]
   }
 }
+
+# Terraform Remote State Datasource
+data "terraform_remote_state" "vpc" {
+  backend = "local"
+  config = {
+    path = "${path.module}/../vpc/terraform.tfstate"
+  }
+}

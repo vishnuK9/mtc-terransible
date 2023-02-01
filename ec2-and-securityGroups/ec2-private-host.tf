@@ -13,6 +13,8 @@ module "ec2_private" {
   subnet_ids = [
     module.vpc.vpc_private_subnets[0],
     module.vpc.vpc_private_subnets[1],
+    data.terraform_remote_state.vpc.outputs.private_subnets[0],
+    data.terraform_remote_state.vpc.outputs.private_subnets[1],
   ]
   tags = local.common_tags
 }

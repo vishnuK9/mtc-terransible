@@ -4,7 +4,7 @@ module "private_sg" {
 
   name = "private-sg"
   description = "private sg for private instances"
-  vpc_id = module.vpc.vpc_id
+  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id 
   ingress_rules = ["ssh-tcp","http-80-tcp"]
   ingress_cidr_blocks = ["0.0.0.0/0"]
   egress_rules = ["all-all"]
