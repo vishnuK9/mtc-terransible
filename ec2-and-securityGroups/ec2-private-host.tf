@@ -11,8 +11,6 @@ module "ec2_private" {
   vpc_security_group_ids = [ module.public_bastion_sg.this_security_group_id]
   instance_count = 3
   subnet_ids = [
-    module.vpc.vpc_private_subnets[0],
-    module.vpc.vpc_private_subnets[1],
     data.terraform_remote_state.vpc.outputs.private_subnets[0],
     data.terraform_remote_state.vpc.outputs.private_subnets[1],
   ]
