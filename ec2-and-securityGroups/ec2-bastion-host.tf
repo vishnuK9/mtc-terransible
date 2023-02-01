@@ -11,8 +11,8 @@ module "ec2_public" {
   tags = local.common_tags
 }
 
-resource "null_resource" "name" {
-  
+resource "null_resource" "name1" {
+
   provisioner "local-exec" {
     command = "echo vpc created on `date` and vpc id : ${data.terraform_remote_state.vpc.outputs.vpc_id} >> creation-time-vpc-id.txt"
     working_dir = "local-exec-output-files/"
