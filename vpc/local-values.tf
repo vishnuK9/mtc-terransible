@@ -8,3 +8,4 @@ locals {
     environment = local.environment     
   }
 }
+
