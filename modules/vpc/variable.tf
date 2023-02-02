@@ -13,3 +13,8 @@ variable "private_cidrs" {
   type = list(string)
   default = [ "10.123.2.0/24","10.123.4.0/24" ]
 } 
+
+variable "nat_gateway_needed" {
+  type = bool
+  default = false
+}

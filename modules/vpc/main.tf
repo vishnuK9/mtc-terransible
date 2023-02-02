@@ -56,6 +56,15 @@ resource "aws_default_route_table" "mtc_private" {
   }
 }
 
+resource "aws_route" "private_routes" {
+  route_table_id = aws_default_route_table.mtc_private.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_nat_gateway.mtc_nat_gateway.id
+  depends_on = [
+    aws_nat_gateway.mtc_nat_gateway
+  ]
+}
+
 # subnet creation based on number of subnet variables
 resource "aws_subnet" "mtc_public_subnet" {
   count = length(local.azs)
@@ -85,4 +94,22 @@ resource "aws_route_table_association" "mtc_public_association" {
   count = length(local.azs)
   subnet_id = aws_subnet.mtc_public_subnet[count.index].id
   route_table_id = aws_route_table.mtc_public_rt.id
+}
+
+resource "aws_eip" "mtc_nat_eip" {
+  # count = nat_gateway_needed ? 1 : 0
+  vpc = true
+}
+
+resource "aws_nat_gateway" "mtc_nat_gateway" {
+  # count = nat_gateway_needed ? 1 : 0
+  aallocation_id = aws_eip.mtc_nat_eip.id
+
+  tags = {
+    Name = "mtc-nat-gateway"
+  } 
+
+  depends_on = [
+    aws_internet_gateway.mtc_igw
+  ]
 }
