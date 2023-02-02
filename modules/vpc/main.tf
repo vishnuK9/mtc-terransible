@@ -97,12 +97,12 @@ resource "aws_route_table_association" "mtc_public_association" {
 }
 
 resource "aws_eip" "mtc_nat_eip" {
-  # count = nat_gateway_needed ? 1 : 0
+  count = nat_gateway_needed ? 1 : 0
   vpc = true
 }
 
 resource "aws_nat_gateway" "mtc_nat_gateway" {
-  # count = nat_gateway_needed ? 1 : 0
+  count = nat_gateway_needed ? 1 : 0
   allocation_id = aws_eip.mtc_nat_eip.id
   subnet_id = aws_subnet.mtc_public_subnet[0].id
 
