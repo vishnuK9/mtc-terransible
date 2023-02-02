@@ -9,3 +9,7 @@ module "security-group" {
   vpc_id = module.vpc.vpc_id
 }
 
+module "ec2" {
+  source = "./ec2/"
+  
+}
