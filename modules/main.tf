@@ -11,6 +11,6 @@ module "security-group" {
 
 module "ec2" {
   source = "./ec2/"
-  vpc_security_group_ids = module.security_group.security_group_id
+  vpc_security_group_ids = module.security-group.security_group_id
   subnet_id = module.vpc.subnet_ids
 }
