@@ -48,8 +48,13 @@ resource "aws_default_route_table" "mtc_private" {
 }
 
 resource "aws_subnet" "mtc_public_subnet" {
+  count = lenght(var.public_cidrs)
   vpc_id = aws_vpc.mtc_vpc.id
-  cidr_block = var.public_cidrs[0]
+  cidr_block = var.public_cidrs[count.index]
   map_public_ip_on_launch = true
-  availability_zone = data.aws_availability_zones.available.names[0]
+  availability_zone = data.aws_availability_zones.available.names[count.index]
+
+  tags = {
+    Name = "mtc-public-${count.index + 1}"
+  }
 }
