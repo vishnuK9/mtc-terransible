@@ -1,7 +1,11 @@
 resource "aws_security_group" "mtc_sg" {
-  name = "public_sg"
+  name = "mtc-public-sg"
   description = "security groups for public instances"
   vpc_id = var.vpc_id
+
+  tags = {
+    Name = "mtc-public-sg"
+  }
 }
 
 resource "aws_security_group_rule" "ingress_all" {
