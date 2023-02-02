@@ -33,7 +33,16 @@ resource "aws_route_table" "mtc_public_rt" {
 }
 
 resource "aws_route" "default_route" {
+  # need a depends on meta 
   route_table_id = aws_route_table.mtc_public_rt.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id = aws_internet_gateway.mtc_igw.id
+}
+
+resource "aws_default_route_table" "mtc_private" {
+  default_route_table_id = aws_vpc.mtc_vpc.default_route_table_id
+
+  tags = {
+    Name = "mtc-private"
+  }
 }
