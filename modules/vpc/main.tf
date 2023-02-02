@@ -58,7 +58,7 @@ resource "aws_default_route_table" "mtc_private" {
 
 # subnet creation based on number of subnet variables
 resource "aws_subnet" "mtc_public_subnet" {
-  count = length(var.public_cidrs)
+  count = length(local.azs)
   vpc_id = aws_vpc.mtc_vpc.id
   cidr_block = cidrsubnet(var.vpc_cidr, 8, count.index)
   map_public_ip_on_launch = true
@@ -71,7 +71,7 @@ resource "aws_subnet" "mtc_public_subnet" {
 
 # subnet creation based on number of subnet variables
 resource "aws_subnet" "mtc-private" {
-  count = length(var.private_cidrs)
+  count = length(local.azs)
   vpc_id = aws_vpc.mtc_vpc.id
   cidr_block = cidrsubnet(var.vpc_cidr, 8, count.index + length(local.azs))
   map_public_ip_on_launch = false
