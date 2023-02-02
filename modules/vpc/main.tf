@@ -70,7 +70,7 @@ resource "aws_subnet" "mtc_public_subnet" {
 }
 
 # subnet creation based on number of subnet variables
-resource "aws_subnet" "mtc-private" {
+resource "aws_subnet" "mtc-private_subnet" {
   count = length(local.azs)
   vpc_id = aws_vpc.mtc_vpc.id
   cidr_block = cidrsubnet(var.vpc_cidr, 8, count.index + length(local.azs))
@@ -79,4 +79,10 @@ resource "aws_subnet" "mtc-private" {
   tags = {
     Name = "mtc-private-${count.index + 1}"
   }
+}
+
+resource "aws_route_table_association" "mtc_public_association" {
+  count = length(local.azs)
+  subnet_id = aws_subnet.mtc-private_subnet[count.index].id
+  route_table_id = aws_route_table.mtc_public_rt.id
 }
