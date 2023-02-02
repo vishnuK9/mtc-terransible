@@ -103,7 +103,8 @@ resource "aws_eip" "mtc_nat_eip" {
 
 resource "aws_nat_gateway" "mtc_nat_gateway" {
   # count = nat_gateway_needed ? 1 : 0
-  aallocation_id = aws_eip.mtc_nat_eip.id
+  allocation_id = aws_eip.mtc_nat_eip.id
+  subnet_id = aws_subnet.mtc_public_subnet[0].id
 
   tags = {
     Name = "mtc-nat-gateway"
