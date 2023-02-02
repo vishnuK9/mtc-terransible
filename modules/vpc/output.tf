@@ -7,5 +7,5 @@ output "availability_zones" {
 }
 
 output "subnet_ids" {
-  value = aws_subnet.mtc_public_subnet[*]
+  value = aws_subnet.mtc_public_subnet.*.id
 }
