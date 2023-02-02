@@ -70,7 +70,7 @@ resource "aws_subnet" "mtc_public_subnet" {
 }
 
 # subnet creation based on number of subnet variables
-resource "aws_subnet" "mtc-private_subnet" {
+resource "aws_subnet" "mtc-private" {
   count = length(local.azs)
   vpc_id = aws_vpc.mtc_vpc.id
   cidr_block = cidrsubnet(var.vpc_cidr, 8, count.index + length(local.azs))
