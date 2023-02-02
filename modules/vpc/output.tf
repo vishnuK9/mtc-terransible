@@ -4,4 +4,4 @@ output "vpc_id" {
 
 output "availability_zones" {
   value = data.aws_availability_zones.available
-}
+}  
