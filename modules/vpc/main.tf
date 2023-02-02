@@ -60,7 +60,7 @@ resource "aws_default_route_table" "mtc_private" {
 resource "aws_subnet" "mtc_public_subnet" {
   count = length(var.public_cidrs)
   vpc_id = aws_vpc.mtc_vpc.id
-  cidr_block = var.public_cidrs[count.index]
+  cidr_block = cidrsubnet(var.vpc_cidr, 8, count.index)
   map_public_ip_on_launch = true
   availability_zone = local.azs[count.index]
 
@@ -73,7 +73,7 @@ resource "aws_subnet" "mtc_public_subnet" {
 resource "aws_subnet" "mtc-private" {
   count = length(var.private_cidrs)
   vpc_id = aws_vpc.mtc_vpc.id
-  cidr_block = var.private_cidrs[count.index]
+  cidr_block = cidrsubnet(var.vpc_cidr, 8, count.index + length(local.azs))
   map_public_ip_on_launch = false
   availability_zone = local.azs[count.index]
   tags = {
