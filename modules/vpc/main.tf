@@ -59,7 +59,7 @@ resource "aws_default_route_table" "mtc_private" {
 resource "aws_route" "private_routes" {
   route_table_id = aws_default_route_table.mtc_private.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id = aws_nat_gateway.mtc_nat_gateway.id
+  gateway_id = aws_nat_gateway.mtc_nat_gateway[0].id
   depends_on = [
     aws_nat_gateway.mtc_nat_gateway
   ]
